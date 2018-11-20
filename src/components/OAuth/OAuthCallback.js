@@ -19,6 +19,10 @@ class OAuthCallback extends Component {
   call({ search, authServer }) {
     axios.get(`${config.baseUri}/oauth/${authServer}-callback${search}`,
       { withCredentials: true })
+      .then((res) => {
+        const { onSuccess } = this.props;
+        onSuccess(res);
+      })
       .catch((err) => {
         const { onError } = this.props;
         onError(err);
@@ -39,7 +43,8 @@ OAuthCallback.propTypes = {
       authServer: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
-  onError: PropTypes.func.isRequired
+  onError: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired
 };
 
 export default OAuthCallback;

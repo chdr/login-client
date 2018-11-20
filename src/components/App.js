@@ -48,7 +48,9 @@ class App extends Component {
     });
   }
 
-  handleSuccess(res) {}
+  handleSuccess(res) {
+    window.location.replace('http://www.chdrdev.com:8888/admin/dashboard/');
+  }
 
   handleError(err) {
     const { response, request } = err;
@@ -76,7 +78,15 @@ class App extends Component {
           }
           <Route
             path="/login/:authServer"
-            render={props => <OAuthCallback {...props} onError={this.handleError} />}
+            render={
+              props => (
+                <OAuthCallback
+                  {...props}
+                  onError={this.handleError}
+                  onSuccess={this.handleSuccess}
+                />
+              )
+            }
           />
           <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mt-8 md:mt-0 mx-2 md:mx-0">
             <OAuthButtons />
