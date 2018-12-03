@@ -41,6 +41,7 @@ class NativeLogin extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const { clearOnSubmit, onSubmitError, onSubmitSuccess } = this.props;
     const { id, password } = this.state;
     const values = {

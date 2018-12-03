@@ -1,36 +1,86 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
+import errorMessageFilter from '../../utility/error-message-filter';
 import config from '../../config';
 
 class OAuthCallback extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      hadError: false,
+      errorTitle: '',
+      errorDetail: ''
+    };
+
     this.call = this.call.bind(this);
   }
 
   componentDidMount() {
-    const { location, match } = this.props;
+    const {
+      location,
+      match,
+      handleSuccess
+    } = this.props;
     const { search } = location;
     const { authServer } = match.params;
-    this.call({ search, authServer });
+
+    this.call({
+      search,
+      authServer,
+      handleSuccess
+    });
   }
 
-  call({ search, authServer }) {
+  call({
+    search,
+    authServer,
+    handleSuccess
+  }) {
     axios.get(`${config.baseUri}/oauth/${authServer}-callback${search}`,
       { withCredentials: true })
       .then((res) => {
-        const { onSuccess } = this.props;
-        onSuccess(res);
+        handleSuccess(res);
       })
       .catch((err) => {
-        const { onError } = this.props;
-        onError(err);
+        const { response } = err;
+        const { errorDetail, errorTitle } = errorMessageFilter(response);
+        this.setState({
+          hadError: true,
+          errorDetail,
+          errorTitle
+        });
       });
   }
 
   render() {
-    return null;
+    const {
+      hadError,
+      errorTitle,
+      errorDetail
+    } = this.state;
+
+    if (hadError) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/',
+            state: {
+              errorTitle,
+              errorDetail
+            }
+          }}
+        />);
+    }
+
+    return (
+      <p>
+        Please wait...
+      </p>
+    );
   }
 }
 
@@ -43,8 +93,7 @@ OAuthCallback.propTypes = {
       authServer: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
-  onError: PropTypes.func.isRequired,
-  onSuccess: PropTypes.func.isRequired
+  handleSuccess: PropTypes.func.isRequired
 };
 
 export default OAuthCallback;
