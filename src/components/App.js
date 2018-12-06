@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <div>
         <Route
-          path="/"
+          path="/client"
           exact
           render={routeProps => (
             <LoginContainer
@@ -29,7 +29,7 @@ class App extends Component {
           )}
         />
         <Route
-          path="/login/:authServer"
+          path="/client/:authServer"
           render={routeProps => (
             <OAuthCallback
               {...routeProps}

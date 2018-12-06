@@ -144,7 +144,7 @@ class NativeLogin extends Component {
               Remember me
             </label>
           </fieldset>
-          <a className="text-green no-underline" href="http://unittest.cgdev.com/#forgot-password">Forgot your password?</a>
+          <a className="text-green hover:text-green-dark no-underline" href="http://unittest.cgdev.com/#forgot-password">Forgot your password?</a>
         </div>
         <button
           type="submit"

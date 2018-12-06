@@ -1,38 +1,36 @@
 {
   "name": "login",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "client for cheddar's login module",
+  "repository": "https://github.com/chdr/login-client",
+  "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
     "axios": "^0.18.0",
-    "prop-types": "^15.6.2",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "mini-css-extract-plugin": "^0.4.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.4.0",
+    "purgecss-webpack-plugin": "^1.4.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.4",
-    "tailwindcss": "^0.6.6"
+    "tailwindcss": "^0.7.2",
+    "terser-webpack-plugin": "^1.1.0",
+    "webpack": "^4.27.0",
+    "webpack-cli": "^3.1.2"
   },
-  "homepage": "http://chdrdev.com:8888",
   "scripts": {
-    "prestart": "tailwind build ./src/pre.index.css -c ./src/tailwind.config.js -o ./src/index.css",
-    "start": "react-scripts start",
-    "prebuild": "tailwind build ./src/pre.index.css -c ./src/tailwind.config.js -o ./src/index.css",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "axios-mock-adapter": "^1.15.0",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
-    "eslint-config-airbnb": "^17.1.0"
+    "build": "webpack --config webpack.config.prod.js",
+    "start": "webpack --watch --config webpack.config.dev.js",
+    "postinstall": "yarn run build"
   }
 }
