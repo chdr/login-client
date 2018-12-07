@@ -11,8 +11,9 @@ class App extends Component {
     this.handleSuccess = this.handleSuccess.bind(this);
   }
 
-  handleSuccess(res) {
-    window.location.replace('http://www.chdrdev.com:8888/admin/dashboard/');
+  handleSuccess({ headers }) {
+    const { location } = headers;
+    window.location.replace(location);
   }
 
   render() {
