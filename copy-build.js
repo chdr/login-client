@@ -1,9 +1,17 @@
 const fs = require('fs-extra');
 
-fs.remove('../cheddar/public/login/build')
-  .then(() => {
-    fs.copy('./build', '../cheddar/public/login/build');
-  })
-  .catch(err => {
-    console.error(err);
-  });
+const path = process.argv[2] === 'docker' ?
+  '../html/public/login'
+  : '../cheddar/public/login';
+
+copyBuild(path);
+
+function copyBuild(relativeDestinationPath) {
+  fs.remove(relativeDestinationPath)
+    .then(() => {
+      fs.copy('./build', relativeDestinationPath);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}

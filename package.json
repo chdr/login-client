@@ -31,8 +31,8 @@
   "scripts": {
     "build": "webpack --config webpack.config.prod.js",
     "start": "webpack --watch --config webpack.config.dev.js",
-    "copy-build": "node ./copy-build.js",
-    "postinstall": "yarn run build"
+    "copy-build": "node ./copy-build.js $CALLSOURCE",
+    "docker-build": "yarn && yarn run build && yarn run copy-build docker"
   },
   "devDependencies": {
     "fs-extra": "^7.0.1"

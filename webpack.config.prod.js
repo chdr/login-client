@@ -57,7 +57,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              publicPath: '/login/build'
+              publicPath: '/login'
             }
           }
         ]
