@@ -61,29 +61,27 @@
  * @import "utilities/skew-transforms";
  */
 
+
+
+/* General */
+
 * {
   box-sizing: border-box;
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  height: 1px;
-  -webkit-box-flex: 1;
-  -ms-flex: 1 1 1px;
-  flex: 1 1 1px;
-  @apply bg-grey;
-}
-
-[disabled] {
-  @apply cursor-not-allowed;
-  @apply opacity-50;
 }
 
 body,
 #root {
   height: 100%;
   min-height: 100vh;
+}
+
+
+
+/* App */
+
+.App {
+  @apply font-sans;
+  @apply h-screen;
 }
 
 .App::after {
@@ -105,11 +103,7 @@ body,
   z-index: 2;
 }
 
-.card {
-  box-shadow: 0px 2px 10px 1px config('colors.grey');
-}
-
-@media (max-height: 500px) {
+@media (max-height: config('screens.sm')) {
   .App .container {
     display: block;
   }
@@ -133,4 +127,272 @@ body,
           url("./img/green-wedge-bottom-corner.png") 0 calc(100% - 35px) / 220px no-repeat,
           url("./img/starry-sky-large.jpg") center / cover no-repeat config('colors.blue-dark');
   }
+}
+
+
+
+/* container */
+
+.container {
+  @apply mx-auto;
+  @apply max-w-md;
+  @apply h-full;
+}
+
+@media (min-width: config('screens.sm')) {
+  .container {
+    @apply flex;
+    @apply justify-center;
+    @apply flex-col;
+  }
+}
+
+
+/* Login Card */
+
+.login-card {
+  box-shadow: 0px 2px 10px 1px config('colors.grey');
+  @apply pt-6;
+  @apply pb-8;
+  @apply px-8;
+  @apply mx-2;
+  @apply bg-white;
+}
+
+@media (min-width: config('screens.sm')) {
+  .login-card {
+    @apply mx-0;
+  }
+}
+
+
+
+/* Header */
+
+header {
+  display: block;
+  text-align: center;
+  margin-top: config('margin.4');
+  margin-bottom: config('margin.4');
+}
+
+header img {
+  width: 220px;
+  height: auto;
+}
+
+@media (min-width: config('screens.md')) {
+  header {
+    margin-top: 0;
+  }
+}
+
+
+
+/* Buttons */
+
+[disabled] {
+  @apply cursor-not-allowed;
+  @apply opacity-50;
+}
+
+button {
+  @apply rounded;
+  @apply px-4;
+  @apply py-2;
+}
+
+button.primary {
+  @apply bg-green;
+  @apply text-white;
+  @apply w-full;
+}
+
+button.primary:hover {
+  @apply bg-green-dark;
+}
+
+button.oauth {
+  @apply bg-grey-light;
+  @apply w-full;
+  @apply mb-3;
+}
+
+button.oauth:hover {
+  @apply bg-grey-dark;
+}
+
+button.alt {
+  @apply bg-transparent;
+  @apply text-green;
+  @apply border;
+  @apply border-green;
+  @apply ml-3;
+}
+
+button.alt:hover {
+  @apply border-transparent;
+  @apply text-white;
+  @apply bg-green;
+}
+
+@media (min-width: config('screens.md')) {
+  button.oauth {
+    @apply mb-0;
+  }
+}
+
+
+
+/* Links */
+a {
+  color: config('colors.green');
+  text-decoration: none;
+}
+
+a:hover {
+  color: config('colors.green-dark');
+}
+
+
+
+/* Divider Line */
+
+.divider {
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
+  @apply my-4;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 1px;
+  flex: 1 1 1px;
+  @apply bg-grey;
+}
+
+.divider span {
+  @apply px-4;
+  @apply text-grey-darker;
+}
+
+
+
+/* OAuthButtons and OAuthButton Component */
+
+.OAuthButtons {
+  @apply mb-0;
+}
+
+@media (min-width: config('screens.md')) {
+  .OAuthButtons {
+    @apply flex;
+    @apply -mx-2;
+    @apply mb-6;
+  }
+}
+
+.OAuthButton {
+  color: config('colors.grey-darkest');
+  @apply flex-1;
+}
+
+.OAuthButton img {
+  @apply float-left;
+}
+
+@media (min-width: config('screens.md')) {
+  .OAuthButton {
+    @apply mx-2;
+  }
+}
+
+
+
+/* Form */
+
+fieldset {
+  @apply mb-4;
+}
+
+input[type="email"],
+input[type="password"] {
+  @apply shadow;
+  @appy appearance-none;
+  @apply border;
+  @apply rounded;
+  @apply w-full;
+  @apply py-2;
+  @apply px-3;
+  color: config('colors.grey-darker');
+  @apply leading-tight;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  @apply outline-none;
+  @apply shadow-outline;
+}
+
+label[for="password"],
+label[for="id"] {
+  @apply block;
+  @apply mb-2;
+}
+
+input[type="checkbox"] {
+  @apply mr-2;
+  @apply leading-tight;
+}
+
+.form-extras {
+  @apply flex;
+  @apply flex-col;
+  @apply justify-start;
+}
+
+.form-extras a {
+  @apply mb-4;
+}
+
+@media (min-width: config('screens.sm')) {
+  .form-extras {
+    @apply justify-between;
+    @apply flex-row;
+  }
+
+  .form-extras {
+    margin-bottom: 0;
+  }
+}
+
+
+/* Error Messages */
+
+div[role="alert"] {
+  @apply mb-4;
+}
+
+div[role="alert"] .title {
+  @apply bg-red;
+  color: config('colors.white');
+  @apply font-bold;
+  @apply rounded-t;
+  @apply px-4;
+  @apply py-2;
+}
+
+div[role="alert"] .detail {
+  @apply border;
+  @apply border-t-0;
+  @apply border-red-light;
+  @apply rounded-b;
+  @apply bg-red-lightest;
+  @apply px-4;
+  @apply py-3;
+  @apply text-red-dark;
 }

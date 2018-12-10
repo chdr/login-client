@@ -107,8 +107,8 @@ class NativeLogin extends Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <fieldset className="mb-4">
-          <label htmlFor="id" className="block mb-2">
+        <fieldset>
+          <label htmlFor="id">
             Email
           </label>
           <input
@@ -116,12 +116,11 @@ class NativeLogin extends Component {
             onChange={this.handleInputChange}
             type="email"
             name="id"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
           />
           { idErrors ? renderErrorMessages(idErrors) : null }
         </fieldset>
-        <fieldset className="mb-4">
-          <label htmlFor="password" className="block mb-2">
+        <fieldset>
+          <label htmlFor="password">
             Password
           </label>
           <input
@@ -129,26 +128,26 @@ class NativeLogin extends Component {
             onChange={this.handleInputChange}
             type="password"
             name="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
           />
           { passwordErrors ? renderErrorMessages(passwordErrors) : null }
         </fieldset>
-        <div className="flex justify-between flex-row">
-          <fieldset className="mb-4">
+        <div className="form-extras">
+          <fieldset>
             <label htmlFor="rememberMe">
               <input
-                className="mr-2 leading-tight"
                 type="checkbox"
                 name="rememberMe"
               />
               Remember me
             </label>
           </fieldset>
-          <a className="text-green hover:text-green-dark no-underline" href="http://unittest.cgdev.com/#forgot-password">Forgot your password?</a>
+          <a href={`${config.marketingLinkUri}/#forgot-password`}>
+            Forgot your password?
+          </a>
         </div>
         <button
           type="submit"
-          className="bg-green hover:bg-green-dark text-white py-2 px-4 rounded w-full"
+          className="primary"
           disabled={isSubmitting}
         >
           Log in

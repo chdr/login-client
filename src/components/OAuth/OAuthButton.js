@@ -5,13 +5,13 @@ import config from '../../config';
 const OAuthButtons = ({ name, linkAppendedAs, logoSrc }) => (
   <a
     href={`${config.baseUri}/oauth/${linkAppendedAs}`}
-    className="text-grey-darkest no-underline flex-1 md:mx-2"
+    className="OAuthButton"
   >
     <button
-      className="bg-grey-light hover:bg-grey-dark py-2 px-4 rounded w-full mb-3 md:mb-0"
+      className="oauth"
       type="button"
     >
-      <img src={logoSrc} className="float-left" alt={`Log in with ${name}`} />
+      <img src={logoSrc} alt={`Log in with ${name}`} />
       {`Log in with ${name}`}
     </button>
   </a>

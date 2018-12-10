@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import OAuthButtons from './OAuth/OAuthButtons';
 import NativeLogin from './NativeLogin';
 import ErrorMessage from './Alerts/ErrorMessage';
+import config from '../config';
+
+import logoCheddar from '../img/logo_cheddar.svg';
 
 const Login = ({
   handleSuccess,
@@ -12,8 +15,16 @@ const Login = ({
   errorTitle,
   errorDetail
 }) => (
-  <div className="App font-sans h-screen h-full">
-    <div className="container mx-auto max-w-md md:flex md:justify-center md:flex-col h-full">
+  <div className="App">
+    <div className="container">
+      <header>
+        <a href="#">
+          <img
+            src={logoCheddar}
+            alt="Cheddar logo"
+          />
+        </a>
+      </header>
       {
         errorTitle && errorDetail
           ? (
@@ -23,10 +34,10 @@ const Login = ({
             />
           ) : null
       }
-      <div className="card bg-white px-8 pt-6 pb-8 mt-8 md:mt-0 mx-2 md:mx-0">
+      <div className="login-card">
         <OAuthButtons />
-        <div className="divider flex justify-center items-center my-4">
-          <span className="px-4 text-grey-darker">or</span>
+        <div className="divider">
+          <span>or</span>
         </div>
         <NativeLogin
           onSubmitError={handleError}
@@ -35,10 +46,10 @@ const Login = ({
         />
         <div className="text-center mt-6">
           Don&apos;t have an account?
-          <a href="http://www.chdrdev.com:8888/signup">
+          <a href={`${config.marketingLinkUri}/signup`}>
             <button
               type="button"
-              className="bg-transparent hover:bg-green text-green hover:text-white py-2 px-4 border border-green hover:border-transparent rounded ml-3"
+              className="alt"
             >
               Sign up
             </button>
