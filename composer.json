@@ -1,0 +1,10 @@
+{
+    "name": "chdr/login-client",
+    "authors": [
+        {
+            "name": "Matt Batman",
+            "email": "matt@getcheddar.com"
+        }
+    ],
+    "require": {}
+}
