@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import config from '../config';
-
 const renderErrorMessages = errorMessages => errorMessages.map(errorMessage => (
   <div
     key={errorMessage}
@@ -57,7 +55,7 @@ class NativeLogin extends Component {
 
     axios({
       method: 'post',
-      url: config.baseUri,
+      url: process.env.API_URL,
       data: values,
       withCredentials: true
     })
@@ -141,7 +139,7 @@ class NativeLogin extends Component {
               Remember me
             </label>
           </fieldset>
-          <a href={`${config.marketingLinkUri}/#forgot-password`}>
+          <a href={`${process.env.MARKETING_URL}/#forgot-password`}>
             Forgot your password?
           </a>
         </div>

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import config from '../../config';
 
 const OAuthButtons = ({ name, linkAppendedAs, logoSrc }) => (
   <a
-    href={`${config.baseUri}/oauth/${linkAppendedAs}`}
+    href={`${process.env.API_URL}/oauth/${linkAppendedAs}`}
     className="OAuthButton"
   >
     <button

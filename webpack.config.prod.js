@@ -5,6 +5,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 
 class TailwindExtractor {
   static extract(content) {
@@ -12,7 +13,7 @@ class TailwindExtractor {
   }
 }
 
-module.exports = {
+module.exports = env => ({
   mode: 'production',
   entry: {
     app: './src/index.js'
@@ -27,13 +28,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react'
-            ]
-          }
+          loader: 'babel-loader'
         }
       },
       {
@@ -65,6 +60,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new DefinePlugin({
+      'process.env.API_URL': JSON.stringify(env.API_URL),
+      'process.env.MARKETING_URL': JSON.stringify(env.MARKETING_URL)
+    }),
     new CleanWebpackPlugin(['build']),
     new MiniCssExtractPlugin({
       filename: '[name].css'
@@ -84,4 +83,4 @@ module.exports = {
       new OptimizeCSSAssetsPlugin({})
     ]
   }
-};
+});

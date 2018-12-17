@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import OAuthButtons from './OAuth/OAuthButtons';
 import NativeLogin from './NativeLogin';
 import ErrorMessage from './Alerts/ErrorMessage';
-import config from '../config';
 
 import logoCheddar from '../img/logo_cheddar.svg';
 
@@ -46,7 +45,7 @@ const Login = ({
         />
         <div className="text-center mt-6">
           Don&apos;t have an account?
-          <a href={`${config.marketingLinkUri}/signup`}>
+          <a href={`${process.env.MARKETING_URL}/signup`}>
             <button
               type="button"
               className="alt"

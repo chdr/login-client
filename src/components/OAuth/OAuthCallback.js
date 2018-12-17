@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import errorMessageFilter from '../../utility/error-message-filter';
-import config from '../../config';
 
 class OAuthCallback extends Component {
   constructor(props) {
@@ -40,7 +39,7 @@ class OAuthCallback extends Component {
     authServer,
     handleSuccess
   }) {
-    axios.get(`${config.baseUri}/oauth/${authServer}-callback${search}`,
+    axios.get(`${process.env.API_URL}/oauth/${authServer}-callback${search}`,
       { withCredentials: true })
       .then((res) => {
         handleSuccess(res);

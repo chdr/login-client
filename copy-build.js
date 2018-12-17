@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 
-const path = process.argv[2] === 'docker' ?
-  '../html/public/login'
+const path = process.argv[2] === 'true'
+  ? '../html/public/login'
   : '../cheddar/public/login';
 
 copyBuild(path);

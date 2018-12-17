@@ -2,8 +2,9 @@ const path = require('path');
 const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 
-module.exports = {
+module.exports = env => ({
   mode: 'development',
   entry: {
     app: './src/index.js'
@@ -18,13 +19,7 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-react'
-            ]
-          }
+          loader: 'babel-loader'
         }
       },
       {
@@ -48,7 +43,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              publicPath: '/login/build'
+              publicPath: '/login'
             }
           }
         ]
@@ -57,9 +52,13 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   plugins: [
+    new DefinePlugin({
+      'process.env.API_URL': JSON.stringify(env.API_URL),
+      'process.env.MARKETING_URL': JSON.stringify(env.MARKETING_URL)
+    }),
     new CleanWebpackPlugin(['build']),
     new MiniCssExtractPlugin({
       filename: '[name].css'
     })
   ]
-};
+});
