@@ -75,11 +75,11 @@
     "setupTestFrameworkScriptFile": "<rootDir>/jest-config/setupTests.js"
   },
   "scripts": {
-    "build": "webpack --env.API_URL=http://login.chdrdev.com:8888 --env.MARKETING_URL=https://www.getcheddar.com --config webpack.config.prod.js",
-    "build-dev-once": "webpack --env.API_URL=http://login.chdrdev.com:8888 --env.MARKETING_URL=http://www.chdrdev.com:8888 --config webpack.config.dev.js",
-    "start": "webpack --env.API_URL=http://login.chdrdev.com:8888 --env.MARKETING_URL=http://www.chdrdev.com:8888 --watch --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.prod.js",
+    "build-dev-once": "webpack --config webpack.config.dev.js",
+    "start": "webpack --watch --config webpack.config.dev.js",
     "copy-build": "node ./copy-build.js $ISDOCKER",
-    "docker-build": "yarn && yarn run build-dev-once && yarn run copy-build true",
+    "docker-build": "yarn && yarn run build && yarn run copy-build true",
     "test": "node jest-config/test-script.js"
   },
   "devDependencies": {

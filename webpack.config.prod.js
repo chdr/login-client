@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const { DefinePlugin } = require('webpack');
+const config = require('./config.chdr');
 
 class TailwindExtractor {
   static extract(content) {
@@ -61,8 +62,8 @@ module.exports = env => ({
   },
   plugins: [
     new DefinePlugin({
-      'process.env.API_URL': JSON.stringify(env.API_URL),
-      'process.env.MARKETING_URL': JSON.stringify(env.MARKETING_URL)
+      'process.env.API_URL': JSON.stringify(config.url.prod.api),
+      'process.env.MARKETING_URL': JSON.stringify(config.url.prod.marketing)
     }),
     new CleanWebpackPlugin(['build']),
     new MiniCssExtractPlugin({

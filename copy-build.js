@@ -1,8 +1,9 @@
 const fs = require('fs-extra');
+const config = require('./config.chdr');
 
 const path = process.argv[2] === 'true'
-  ? '../html/public/login'
-  : '../cheddar/public/login';
+  ? config.path.docker
+  : config.path.local;
 
 copyBuild(path);
 

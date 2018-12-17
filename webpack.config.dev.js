@@ -3,6 +3,7 @@ const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const { DefinePlugin } = require('webpack');
+const config = require('./config.chdr');
 
 module.exports = env => ({
   mode: 'development',
@@ -53,8 +54,8 @@ module.exports = env => ({
   devtool: 'inline-source-map',
   plugins: [
     new DefinePlugin({
-      'process.env.API_URL': JSON.stringify(env.API_URL),
-      'process.env.MARKETING_URL': JSON.stringify(env.MARKETING_URL)
+      'process.env.API_URL': JSON.stringify(config.url.dev.api),
+      'process.env.MARKETING_URL': JSON.stringify(config.url.dev.marketing)
     }),
     new CleanWebpackPlugin(['build']),
     new MiniCssExtractPlugin({
