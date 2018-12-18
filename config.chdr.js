@@ -5,13 +5,16 @@ const config = {
       marketing: 'http://www.chdrdev.com:8888'
     },
     prod: {
-      api: 'http://login.chdrdev.com:8888',
+      api: 'https://login.getcheddar.com',
       marketing: 'https://www.getcheddar.com'
     }
   },
   path: {
-    docker: '../html/public/login',
-    local: '../cheddar/public/login'
+    production: '../../../public/login',
+    development: {
+      static: '../../../public/login',
+      active: '../cheddar/public/login'
+    }
   }
 };
 
