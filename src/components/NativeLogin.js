@@ -15,20 +15,30 @@ class NativeLogin extends Component {
   constructor(props) {
     super(props);
 
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+    const id = localStorage.getItem('id') ? localStorage.getItem('id') : '';
+
     this.state = {
       isSubmitting: false,
-      id: '',
+      id,
       password: '',
+      rememberMe,
       idErrors: [],
-      passwordErrors: []
+      passwordErrors: [],
+      rememberMeErrors: []
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setLocalStorage = this.setLocalStorage.bind(this);
   }
 
   handleInputChange(event) {
-    const { name, value } = event.target;
+    const { target } = event;
+    const { name, type } = target;
+
+    const value = type === 'checkbox' ? target.checked : target.value;
+
     const errorName = `${name}Errors`;
 
     this.setState({
@@ -41,10 +51,11 @@ class NativeLogin extends Component {
     event.preventDefault();
 
     const { clearOnSubmit, onSubmitError, onSubmitSuccess } = this.props;
-    const { id, password } = this.state;
+    const { id, password, rememberMe } = this.state;
     const values = {
       id,
-      password
+      password,
+      rememberMe
     };
 
     clearOnSubmit();
@@ -63,6 +74,8 @@ class NativeLogin extends Component {
         this.setState({
           isSubmitting: false
         });
+
+        this.setLocalStorage(values);
 
         onSubmitSuccess(res);
       })
@@ -88,10 +101,20 @@ class NativeLogin extends Component {
             }, {});
           this.setState({
             idErrors: errors.id ? errors.id : '',
-            passwordErrors: errors.password ? errors.password : ''
+            passwordErrors: errors.password ? errors.password : '',
+            rememberMeErrors: errors.rememberMe ? errors.rememberMe : ''
           });
         }
       });
+  }
+
+  setLocalStorage({rememberMe, id}) {
+    if (rememberMe) {
+      localStorage.setItem('rememberMe', rememberMe);
+      localStorage.setItem('id', id);
+    } else {
+      localStorage.clear();
+    }
   }
 
   render() {
@@ -99,8 +122,10 @@ class NativeLogin extends Component {
       isSubmitting,
       id,
       password,
+      rememberMe,
       idErrors,
-      passwordErrors
+      passwordErrors,
+      rememberMeErrors
     } = this.state;
 
     return (
@@ -135,9 +160,12 @@ class NativeLogin extends Component {
               <input
                 type="checkbox"
                 name="rememberMe"
+                checked={rememberMe}
+                onChange={this.handleInputChange}
               />
               Remember me
             </label>
+            { rememberMeErrors ? renderErrorMessages(rememberMeErrors) : null }
           </fieldset>
           <a href={`${process.env.MARKETING_URL}/#forgot-password`}>
             Forgot your password?

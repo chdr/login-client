@@ -25,7 +25,7 @@ Production dependencies can be installed with
 yarn install --production=true
 ```
 
-All dependencies can be installed with
+All production and development dependencies can be installed with
 ```
 yarn install
 ```
@@ -44,11 +44,11 @@ The development builds can be run locally with:
 yarn run build-dev
 ```
 
-In the future,
+If you're actively developing the login client, you can use
 ```
 yarn run start
 ```
-will be restored for active development.
+to watch for changes and rebuild. The contents of the `build` directory will be copied to `chdr/cheddar`. This requires `chdr/login-client` to be cloned at the same hierarchical level in your folder structure.
 
 #### Move the Contents of the `build` Directory
 
@@ -58,13 +58,10 @@ The production and the development build as a static dependency of `chdr/cheddar
 yarn run copy-build
 ```
 
-or
-
+If actively developing the `chdr/login-client`, you can use
 ```
-yarn run copy-build false
+yarn run copy-build-active
 ```
-
-Actively developing the `chdr/login-client` requires additional setup. The exact steps are being worked on.
 
 #### Putting It All Together
 
@@ -82,4 +79,7 @@ As a static dependency:
 yarn run deploy-development-static
 ```
 
-A process for active development is still under development.
+While actively developing, just use:
+```
+yarn run start
+```

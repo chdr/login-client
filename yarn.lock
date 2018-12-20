@@ -6623,6 +6623,11 @@ rsvp@^3.3.3:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
   integrity sha512-OfWGQTb9vnwRjwtA2QwpG2ICclHC3pgXZO5xt8H2EfgDquO0qVdSb5T88L4qJVAEugbS56pAuV4XZM58UX8ulw==
 
+run-node-webpack-plugin@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/run-node-webpack-plugin/-/run-node-webpack-plugin-1.1.1.tgz#a4b1f711273101a8aa766dc2edebdc65444361cd"
+  integrity sha512-lcld9UIvQ19NelMuw75u8INFcZHqZdWrAK5QzehhV3OWJOxbnUriqy40RZ+ukQkzTPVcFfMGG4tN5aBqnIdwbg==
+
 run-queue@^1.0.0, run-queue@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/run-queue/-/run-queue-1.0.3.tgz#e848396f057d223f24386924618e25694161ec47"

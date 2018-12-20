@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const config = require('./config.chdr');
 
-const path = config.path.production;
+const path = config.path.development.active;
 
 copyBuild(path);
 

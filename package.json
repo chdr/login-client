@@ -80,8 +80,8 @@
     "build-dev": "webpack --config webpack.config.dev.js",
     "start": "webpack --watch --config webpack.config.dev.js",
     "copy-build": "node ./copy-build.js $ISACTIVEDEVELOPMENT",
-    "deploy-production": "yarn install --production=true && yarn run build && yarn run copy-build false",
-    "deploy-development-static": "yarn install && yarn run build-dev && yarn run copy-build false",
+    "deploy-production": "yarn install --production=true && yarn run build && yarn run copy-build",
+    "deploy-development-static": "yarn install && yarn run build-dev && yarn run copy-build",
     "test": "node jest-config/test-script.js"
   },
   "devDependencies": {
@@ -90,6 +90,7 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "jest": "^23.6.0",
-    "react-test-renderer": "^16.6.3"
+    "react-test-renderer": "^16.6.3",
+    "run-node-webpack-plugin": "^1.1.1"
   }
 }

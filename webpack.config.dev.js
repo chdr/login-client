@@ -3,6 +3,7 @@ const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const { DefinePlugin } = require('webpack');
+const RunNodeWebpackPlugin = require('run-node-webpack-plugin');
 const config = require('./config.chdr');
 
 module.exports = env => ({
@@ -60,6 +61,10 @@ module.exports = env => ({
     new CleanWebpackPlugin(['build']),
     new MiniCssExtractPlugin({
       filename: '[name].css'
+    }),
+    new RunNodeWebpackPlugin({
+      scriptToRun: './copy-build-active.js',
+      runOnlyInWatchMode: 'true'
     })
   ]
 });

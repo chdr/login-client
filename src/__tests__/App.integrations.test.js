@@ -90,6 +90,33 @@ describe('App component behavior', () => {
       }, 0);
     });
 
-    it('should attempt a redirect if OK response returned from server', () => {});
+    it('should attempt a redirect if 200 response returned from server', (done) => {
+      const mockResponseData = {
+        id: 'test@getcheddar.com',
+        firstName: null,
+        lastName: null,
+        timezone: null,
+        isActive: 1
+      };
+      const mockResponseHeaders = {
+        status: 200,
+        location: 'http://www.chdrdev.com:8888/admin/dashboard/',
+      };
+      mockAdapter
+        .onPost(process.env.API_URL)
+        .reply(200, mockResponseData, mockResponseHeaders);
+
+      window.location.replace = jest.fn();
+
+      wrapped.find('form').simulate('submit');
+
+      setTimeout(() => {
+        wrapped.update();
+
+        expect(window.location.replace).toBeCalledWith(mockResponseHeaders.location);
+
+        done();
+      }, 0);
+    });
   });
 });
