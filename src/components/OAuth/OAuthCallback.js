@@ -66,7 +66,7 @@ class OAuthCallback extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/',
+            pathname: '/client',
             state: {
               errorTitle,
               errorDetail
