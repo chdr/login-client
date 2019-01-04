@@ -6,17 +6,10 @@ import Login from './Login';
 import errorMessageFilter from '../utility/error-message-filter';
 
 class LoginContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      errorTitle: '',
-      errorDetail: ''
-    };
-
-    this.handleError = this.handleError.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    errorTitle: '',
+    errorDetail: ''
+  };
 
   componentDidMount() {
     const { location, history } = this.props;
@@ -42,14 +35,14 @@ class LoginContainer extends Component {
     }
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     this.setState({
       errorTitle: '',
       errorDetail: ''
     });
   }
 
-  handleError(err) {
+  handleError = (err) => {
     const { response, request } = err;
     // the request was made but no response was received
     if (!response && request) {}

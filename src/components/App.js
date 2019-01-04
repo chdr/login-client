@@ -5,27 +5,21 @@ import LoginContainer from './Login.Container';
 import OAuthCallback from './OAuth/OAuthCallback';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleSuccess = this.handleSuccess.bind(this);
-  }
-
-  handleSuccess({ headers }) {
+  navigateToLocationHeader = ({ headers }) => {
     const { location } = headers;
     window.location.replace(location);
   }
 
   render() {
     return (
-      <div>
+      <div className="app">
         <Route
           path="/client"
           exact
           render={routeProps => (
             <LoginContainer
               {...routeProps}
-              handleSuccess={this.handleSuccess}
+              handleSuccess={this.navigateToLocationHeader}
             />
           )}
         />
@@ -34,7 +28,7 @@ class App extends Component {
           render={routeProps => (
             <OAuthCallback
               {...routeProps}
-              handleSuccess={this.handleSuccess}
+              handleSuccessRedirect={this.navigateToLocationHeader}
             />
           )}
         />

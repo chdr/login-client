@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import OAuthButtons from './OAuth/OAuthButtons';
-import NativeLogin from './NativeLogin';
+import NativeLoginForm from './NativeLoginForm.Container';
 import ErrorMessage from './Alerts/ErrorMessage';
-
-import logoCheddar from '../img/logo_cheddar.svg';
+import Header from './Header';
 
 const Login = ({
   handleSuccess,
@@ -14,16 +13,9 @@ const Login = ({
   errorTitle,
   errorDetail
 }) => (
-  <div className="App">
+  <div className="page">
     <div className="container">
-      <header>
-        <a href="#">
-          <img
-            src={logoCheddar}
-            alt="Cheddar logo"
-          />
-        </a>
-      </header>
+      <Header />
       {
         errorTitle && errorDetail
           ? (
@@ -33,12 +25,12 @@ const Login = ({
             />
           ) : null
       }
-      <div className="login-card">
+      <div className="card">
         <OAuthButtons />
         <div className="divider">
           <span>or</span>
         </div>
-        <NativeLogin
+        <NativeLoginForm
           onSubmitError={handleError}
           onSubmitSuccess={handleSuccess}
           clearOnSubmit={handleSubmit}

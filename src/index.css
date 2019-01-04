@@ -75,16 +75,19 @@ body,
   min-height: 100vh;
 }
 
-
-
-/* App */
-
-.App {
+body {
   @apply font-sans;
+}
+
+
+
+/* page class */
+
+.page {
   @apply h-screen;
 }
 
-.App::after {
+.page::after {
   top: 0;
   left: 0;
   content: "";
@@ -98,19 +101,19 @@ body,
   z-index: 1;
 }
 
-.App > * {
+.page > * {
   position: relative;
   z-index: 2;
 }
 
 @media (max-height: config('screens.sm')) {
-  .App .container {
+  .page .container {
     display: block;
   }
 }
 
 @media (min-width: config('screens.sm')) {
-  .App::after {
+  .page::after {
     height: 35vh;
     background:
           url("./img/white-diagonal-mask-thick.png") bottom right / 100vw 90px no-repeat,
@@ -120,7 +123,7 @@ body,
 }
 
 @media (min-width: config('screens.lg')) {
-  .App::after {
+  .page::after {
     height: 45vh;
     background:
           url("./img/white-diagonal-mask-thick.png") bottom right / 100vw 90px no-repeat,
@@ -150,7 +153,7 @@ body,
 
 /* Login Card */
 
-.login-card {
+.card {
   box-shadow: 0px 2px 10px 1px config('colors.grey');
   @apply pt-6;
   @apply pb-8;
@@ -160,7 +163,7 @@ body,
 }
 
 @media (min-width: config('screens.sm')) {
-  .login-card {
+  .card {
     @apply mx-0;
   }
 }
@@ -369,6 +372,7 @@ input[type="checkbox"] {
     margin-bottom: 0;
   }
 }
+
 
 
 /* Error Messages */

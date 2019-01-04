@@ -26,7 +26,7 @@ describe('App component rendering', () => {
   });
 
   it('stands up when given /client route', () => {
-    expect(wrapped.exists('div.App')).toEqual(true);
+    expect(wrapped.exists('div.app')).toEqual(true);
   });
 
   it('renders a GitHub login button', () => {

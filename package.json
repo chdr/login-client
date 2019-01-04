@@ -85,6 +85,7 @@
     "test": "node jest-config/test-script.js"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "axios-mock-adapter": "^1.15.0",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.8.0",

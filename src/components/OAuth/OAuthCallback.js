@@ -4,62 +4,69 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import errorMessageFilter from '../../utility/error-message-filter';
+import OAuthEmailConfirmation from './OAuthEmailConfirmation.Container';
 
 class OAuthCallback extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    hadError: false,
+    emailList: [],
+    errorTitle: '',
+    errorDetail: ''
+  };
 
-    this.state = {
-      hadError: false,
-      errorTitle: '',
-      errorDetail: ''
-    };
+  onError = (err) => {
+    const { response } = err;
+    const { errorDetail, errorTitle } = errorMessageFilter(response);
 
-    this.call = this.call.bind(this);
-  }
+    this.setState({
+      hadError: true,
+      errorDetail,
+      errorTitle
+    });
+  };
+
+  onSuccess = (res) => {
+    const { handleSuccessRedirect } = this.props;
+
+    if (res.headers.location) {
+      handleSuccessRedirect(res);
+    } else {
+      this.setState({
+        emailList: res.data
+      });
+    }
+  };
+
+  call = ({
+    search,
+    authServer,
+    handleSuccess
+  }) => {
+    axios.get(`${process.env.API_URL}/oauth/${authServer}-callback${search}`,
+      { withCredentials: true })
+      .then(this.onSuccess)
+      .catch(this.onError);
+  };
 
   componentDidMount() {
-    const {
-      location,
-      match,
-      handleSuccess
-    } = this.props;
+    const { location, match } = this.props;
     const { search } = location;
     const { authServer } = match.params;
 
     this.call({
       search,
-      authServer,
-      handleSuccess
+      authServer
     });
   }
 
-  call({
-    search,
-    authServer,
-    handleSuccess
-  }) {
-    axios.get(`${process.env.API_URL}/oauth/${authServer}-callback${search}`,
-      { withCredentials: true })
-      .then((res) => {
-        handleSuccess(res);
-      })
-      .catch((err) => {
-        const { response } = err;
-        const { errorDetail, errorTitle } = errorMessageFilter(response);
-        this.setState({
-          hadError: true,
-          errorDetail,
-          errorTitle
-        });
-      });
-  }
-
   render() {
+    const { handleSuccessRedirect } = this.props;
+
     const {
       hadError,
       errorTitle,
-      errorDetail
+      errorDetail,
+      emailList
     } = this.state;
 
     if (hadError) {
@@ -73,6 +80,15 @@ class OAuthCallback extends Component {
             }
           }}
         />);
+    }
+
+    if (emailList.length) {
+      return (
+        <OAuthEmailConfirmation
+          emails={emailList}
+          handleSuccess={handleSuccessRedirect}
+        />
+      );
     }
 
     return (
@@ -92,7 +108,7 @@ OAuthCallback.propTypes = {
       authServer: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
-  handleSuccess: PropTypes.func.isRequired
+  handleSuccessRedirect: PropTypes.func.isRequired
 };
 
 export default OAuthCallback;
