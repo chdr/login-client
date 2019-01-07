@@ -40,7 +40,7 @@ const Input = ({
   if (type === 'radio') {
     return (
       <fieldset>
-        <label htmlFor={htmlFor}>
+        <label>
           <input
             type={type}
             name={name}
@@ -48,7 +48,9 @@ const Input = ({
             value={value}
             onChange={onChange}
           />
+        <span>
           { label }
+        </span>
         </label>
         { errors ? renderErrorMessages(errors) : null }
       </fieldset>

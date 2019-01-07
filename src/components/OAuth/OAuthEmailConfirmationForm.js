@@ -15,21 +15,23 @@ const OAuthEmailConfirmationForm = ({
     handleInputChange
   }) => (
     <form onSubmit={handleSubmit}>
-      {
-        emails.map(email => (
-          <Input
-            key={email}
-            htmlFor="id"
-            label={email}
-            value={email}
-            onChange={handleInputChange}
-            checked={email === id}
-            type="radio"
-            name="id"
-            errors={idErrors}
-          />
-        ))
-      }
+      <div className="radio-group">
+        {
+          emails.map(email => (
+            <Input
+              key={email}
+              htmlFor="id"
+              label={email}
+              value={email}
+              onChange={handleInputChange}
+              checked={email === id}
+              type="radio"
+              name="id"
+              errors={idErrors}
+            />
+          ))
+        }
+      </div>
       <Input
         htmlFor="password"
         label="Password"
@@ -39,9 +41,6 @@ const OAuthEmailConfirmationForm = ({
         name="password"
         errors={passwordErrors}
       />
-      <a href={`${process.env.MARKETING_URL}/#forgot-password`}>
-        Forgot your password?
-      </a>
       <button
         type="submit"
         className="primary"
@@ -49,6 +48,9 @@ const OAuthEmailConfirmationForm = ({
       >
         Authorize
       </button>
+      <a href={`${process.env.MARKETING_URL}/#forgot-password`}>
+        Forgot your password?
+      </a>
     </form>
 );
 

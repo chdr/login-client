@@ -13,7 +13,7 @@ const OAuthEmailConfirmation = ({
   handleError,
   handleSuccess
 }) => (
-  <div className="page">
+  <div className="page OAuthEmailConfirmation">
     <div className="container">
       <Header />
         {
@@ -26,6 +26,12 @@ const OAuthEmailConfirmation = ({
             ) : null
         }
       <div className="card">
+        <div className="card-header">
+          <h2>
+            Confirm your account
+          </h2>
+          <hr className="green-divider" />
+        </div>
         <p>
           Great! Just confirm that you'd like to link these credentials to
           Cheddar. You won't need to do this again.
