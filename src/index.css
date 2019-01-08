@@ -65,16 +65,19 @@
 
 /* General */
 
+/* purgecss ignore */
 * {
   box-sizing: border-box;
 }
 
+/* purgecss ignore */
 body,
 #root {
   height: 100%;
   min-height: 100vh;
 }
 
+/* purgecss ignore */
 body {
   @apply font-sans;
 }
