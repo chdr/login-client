@@ -40,13 +40,14 @@ const Input = ({
   if (type === 'radio') {
     return (
       <fieldset>
-        <label>
+        <label htmlFor={htmlFor}>
           <input
             type={type}
             name={name}
             checked={checked}
             value={value}
             onChange={onChange}
+            id={htmlFor}
           />
         <span>
           { label }
