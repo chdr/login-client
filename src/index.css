@@ -401,12 +401,21 @@ input[type="checkbox"] {
 }
 
 .radio-group fieldset {
-  @apply mb-6;
+  @apply mb-3;
 }
 
 .radio-group label {
   display: block;
   cursor: pointer;
+
+  @apply shadow;
+  @apply border;
+  @apply rounded;
+  @apply w-full;
+  @apply py-4;
+  @apply px-2;
+  color: config('colors.grey-darker');
+  @apply leading-tight;
 }
 
 .radio-group label > span:before {

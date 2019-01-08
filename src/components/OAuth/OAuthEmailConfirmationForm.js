@@ -20,7 +20,7 @@ const OAuthEmailConfirmationForm = ({
           emails.map(email => (
             <Input
               key={email}
-              htmlFor="id"
+              htmlFor={email}
               label={email}
               value={email}
               onChange={handleInputChange}
