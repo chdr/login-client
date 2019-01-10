@@ -46,8 +46,6 @@ class NativeLoginFormContainer extends React.Component {
       isSubmitting: true
     });
 
-    values.rememberMe = 'false';
-
     axios({
       method: 'post',
       url: process.env.API_URL,

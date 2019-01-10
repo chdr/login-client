@@ -4,6 +4,7 @@ import axios from 'axios';
 import { MemoryRouter } from 'react-router-dom';
 import MockAdapter from 'axios-mock-adapter';
 import App from '../components/App';
+import NativeLoginFormContainer from '../components/NativeLoginForm.Container';
 
 describe('Native login form', () => {
   let wrapped;
@@ -31,6 +32,66 @@ describe('Native login form', () => {
 
   afterAll(() => {
     mockAdapter.restore();
+  });
+
+  it('should contain form fields that modify form state', () => {
+    const expectedInitialState = {
+      isSubmitting: false,
+      id: '',
+      password: '',
+      rememberMe: false,
+      idErrors: [],
+      passwordErrors: [],
+      rememberMeErrors: []
+    };
+
+    const expectedEndState = {
+      isSubmitting: false,
+      id: 'test@getcheddar.com',
+      password: 'thetestpassword',
+      rememberMe: true,
+      idErrors: [],
+      passwordErrors: [],
+      rememberMeErrors: []
+    };
+
+    // check form state
+    expect(wrapped.find(NativeLoginFormContainer).state()).toEqual(expectedInitialState);
+
+    // check field states
+    expect(wrapped.find('input[name="id"]').prop('value')).toEqual(expectedInitialState.id);
+    expect(wrapped.find('input[name="password"]').prop('value')).toEqual(expectedInitialState.password);
+
+    // change each form field
+    wrapped.find('input[name="id"]').simulate('change', {
+      target: {
+        name: 'id',
+        value: 'test@getcheddar.com'
+      }
+    });
+
+    wrapped.find('input[name="password"]').simulate('change', {
+      target: {
+        name: 'password',
+        value: 'thetestpassword'
+      }
+    });
+
+    wrapped.find('input[name="rememberMe"]').simulate('change', {
+      target: {
+        name: 'rememberMe',
+        value: true
+      }
+    });
+
+    wrapped.update();
+
+    // check that form state was updated
+    expect(wrapped.find(NativeLoginFormContainer).state()).toEqual(expectedEndState);
+
+    // check that fields were updated
+    expect(wrapped.find('input[name="id"]').prop('value')).toEqual(expectedEndState.id);
+    expect(wrapped.find('input[name="password"]').prop('value')).toEqual(expectedEndState.password);
   });
 
   it('should display an error message from the server', (done) => {
