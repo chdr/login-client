@@ -4,16 +4,26 @@ import PropTypes from 'prop-types';
 
 import Login from './Login';
 import errorMessageFilter from '../utility/error-message-filter';
+import splitSearch from '../utility/split-search';
 
 class LoginContainer extends Component {
   state = {
     errorTitle: '',
-    errorDetail: ''
+    errorDetail: '',
+    fwd: ''
   };
 
   componentDidMount() {
-    const { location, history } = this.props;
-    const { state } = location;
+    const { location, history, match } = this.props;
+    const { search, state } = location;
+
+    const searchParams = splitSearch(search);
+
+    if (searchParams.fwd) {
+      this.setState({
+        fwd: searchParams.fwd
+      })
+    }
 
     if (state !== undefined) {
       const { errorDetail, errorTitle } = state;
@@ -21,6 +31,7 @@ class LoginContainer extends Component {
         errorDetail,
         errorTitle
       });
+
       const stateFreeLocation = Object.assign(
         {},
         location,
@@ -58,7 +69,7 @@ class LoginContainer extends Component {
   }
 
   render() {
-    const { errorTitle, errorDetail } = this.state;
+    const { errorTitle, errorDetail, fwd } = this.state;
     const { handleSuccess } = this.props;
 
     return (
@@ -68,6 +79,7 @@ class LoginContainer extends Component {
         handleSubmit={this.handleSubmit}
         errorTitle={errorTitle}
         errorDetail={errorDetail}
+        fwd={fwd}
       />
     );
   }
@@ -75,6 +87,7 @@ class LoginContainer extends Component {
 
 LoginContainer.propTypes = {
   location: PropTypes.shape({
+    search: PropTypes.string,
     state: PropTypes.shape({
       errorTitle: PropTypes.string,
       errorDetail: PropTypes.string
