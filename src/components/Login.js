@@ -11,8 +11,7 @@ const Login = ({
   handleError,
   handleSubmit,
   errorTitle,
-  errorDetail,
-  fwd
+  errorDetail
 }) => (
   <div className="page">
     <div className="container">
@@ -27,9 +26,7 @@ const Login = ({
           ) : null
       }
       <div className="card">
-        <OAuthButtons
-          fwd={fwd}
-        />
+        <OAuthButtons />
         <div className="divider">
           <span>or</span>
         </div>
@@ -37,7 +34,6 @@ const Login = ({
           onSubmitError={handleError}
           onSubmitSuccess={handleSuccess}
           clearOnSubmit={handleSubmit}
-          fwd={fwd}
         />
         <div className="text-center mt-6">
           Don&apos;t have an account?
@@ -60,8 +56,7 @@ Login.propTypes = {
   handleError: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   errorTitle: PropTypes.string.isRequired,
-  errorDetail: PropTypes.string.isRequired,
-  fwd: PropTypes.string
+  errorDetail: PropTypes.string.isRequired
 };
 
 export default Login;

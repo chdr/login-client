@@ -32,13 +32,12 @@ class NativeLoginFormContainer extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { clearOnSubmit, onSubmitError, onSubmitSuccess, fwd } = this.props;
+    const { clearOnSubmit, onSubmitError, onSubmitSuccess } = this.props;
     const { id, password, rememberMe } = this.state;
     const values = {
       id,
       password,
-      rememberMe,
-      fwd
+      rememberMe
     };
 
     clearOnSubmit();
@@ -46,6 +45,8 @@ class NativeLoginFormContainer extends React.Component {
     this.setState({
       isSubmitting: true
     });
+
+    values.rememberMe = 'false';
 
     axios({
       method: 'post',
@@ -130,8 +131,7 @@ class NativeLoginFormContainer extends React.Component {
 NativeLoginFormContainer.propTypes = {
   onSubmitError: PropTypes.func.isRequired,
   clearOnSubmit: PropTypes.func.isRequired,
-  onSubmitSuccess: PropTypes.func.isRequired,
-  fwd: PropTypes.string.isRequired
+  onSubmitSuccess: PropTypes.func.isRequired
 };
 
 export default NativeLoginFormContainer;
