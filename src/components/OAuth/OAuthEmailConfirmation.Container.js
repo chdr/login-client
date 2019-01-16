@@ -36,10 +36,11 @@ class OAuthEmailConfirmationContainer extends React.Component {
 
   render() {
     const { errorTitle, errorDetail } = this.state;
-    const { emails, handleSuccess } = this.props;
+    const { emails, handleSuccess, authServer } = this.props;
 
     return (
       <OAuthEmailConfirmation
+        authServer={authServer}
         emails={emails}
         errorTitle={errorTitle}
         errorDetail={errorDetail}
@@ -52,6 +53,7 @@ class OAuthEmailConfirmationContainer extends React.Component {
 }
 
 OAuthEmailConfirmation.propTypes = {
+  authServer: PropTypes.string.isRequired,
   emails: PropTypes.array.isRequired,
   handleSuccess: PropTypes.func.isRequired
 };

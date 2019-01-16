@@ -12,7 +12,8 @@ const OAuthEmailConfirmationForm = ({
     idErrors,
     passwordErrors,
     handleSubmit,
-    handleInputChange
+    handleInputChange,
+    authServer,
   }) => (
     <form onSubmit={handleSubmit}>
       <div className="radio-group">
@@ -40,13 +41,14 @@ const OAuthEmailConfirmationForm = ({
         type="password"
         name="password"
         errors={passwordErrors}
+        placeholder='Cheddar password'
       />
       <button
         type="submit"
         className="primary"
         disabled={isSubmitting}
       >
-        Authorize
+        Link your account
       </button>
       <a href={`${process.env.MARKETING_URL}/#forgot-password`}>
         Forgot your password?

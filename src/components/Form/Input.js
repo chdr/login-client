@@ -18,19 +18,23 @@ const Input = ({
   onChange,
   type,
   name,
-  errors
+  errors,
+  placeholder
 }) => {
   if (type === 'checkbox') {
     return (
-      <fieldset>
+      <fieldset className="checkbox">
         <label htmlFor={htmlFor}>
           <input
             type={type}
             name={name}
             checked={checked}
             onChange={onChange}
+            id={htmlFor}
           />
-          { label }
+          <span>
+            { label }
+          </span>
         </label>
         { errors ? renderErrorMessages(errors) : null }
       </fieldset>
@@ -49,9 +53,9 @@ const Input = ({
             onChange={onChange}
             id={htmlFor}
           />
-        <span>
-          { label }
-        </span>
+          <span>
+            { label }
+          </span>
         </label>
         { errors ? renderErrorMessages(errors) : null }
       </fieldset>
@@ -68,6 +72,7 @@ const Input = ({
         onChange={onChange}
         type={type}
         name={name}
+        placeholder={placeholder}
       />
       { errors ? renderErrorMessages(errors) : null }
     </fieldset>
@@ -82,7 +87,8 @@ Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  errors: PropTypes.array.isRequired
+  errors: PropTypes.array.isRequired,
+  placeholder: PropTypes.string
 };
 
 export default Input;

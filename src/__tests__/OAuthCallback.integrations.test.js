@@ -132,6 +132,28 @@ describe('OAuthCallback', () => {
         }, 0);
       });
 
+      it('should indicate which authorization service was used', (done) => {
+        const authServer = 'Google';
+
+        mockAdapter
+          .onGet(`${process.env.API_URL}/oauth/${authServer}-callback${queryParams}`)
+          .reply(200, mockResponseData, {});
+
+        wrapped = mount(
+          <MemoryRouter initialEntries={[`/client/${authServer}${queryParams}`]}>
+            <App />
+          </MemoryRouter>
+        );
+
+        setTimeout(() => {
+          wrapped.update();
+
+          expect(wrapped.render().text()).toContain(authServer);
+
+          done();
+        });
+      });
+
       it('form should update values when modified', (done) => {
         mockAdapter
           .onGet(`${process.env.API_URL}/oauth/${authServer}-callback${queryParams}`)

@@ -97,6 +97,12 @@ h1, h2, h3, h4, h5, h6, p {
   line-height: 1.2;
 }
 
+label[for="password"],
+label[for="id"],
+button {
+  font-weight: 700;
+}
+
 
 /* page class */
 
@@ -110,7 +116,7 @@ h1, h2, h3, h4, h5, h6, p {
   content: "";
   position: absolute;
   width: 100%;
-  height: 25vh;
+  height: 30vh;
   background:
         url("./img/white-diagonal-mask-thick.png") bottom right / 100vw 90px no-repeat,
         url("./img/green-wedge-bottom-corner.png") 0 calc(100% - 35px) / 220px no-repeat,
@@ -131,7 +137,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 @media (min-width: config('screens.sm')) {
   .page::after {
-    height: 35vh;
+    height: 45vh;
     background:
           url("./img/white-diagonal-mask-thick.png") bottom right / 100vw 90px no-repeat,
           url("./img/green-wedge-bottom-corner.png") 0 calc(100% - 35px) / 220px no-repeat,
@@ -141,7 +147,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 @media (min-width: config('screens.lg')) {
   .page::after {
-    height: 45vh;
+    height: 47vh;
     background:
           url("./img/white-diagonal-mask-thick.png") bottom right / 100vw 90px no-repeat,
           url("./img/green-wedge-bottom-corner.png") 0 calc(100% - 35px) / 220px no-repeat,
@@ -223,13 +229,14 @@ header img {
 button {
   @apply rounded;
   @apply px-4;
-  @apply py-2;
+  @apply py-3;
 }
 
 button.primary {
   @apply bg-green;
   @apply text-white;
   @apply w-full;
+  @apply text-lg;
 }
 
 button.primary:hover {
@@ -249,9 +256,11 @@ button.oauth:hover {
 button.alt {
   @apply bg-transparent;
   @apply text-green;
-  @apply border;
+  @apply border-2;
   @apply border-green;
   @apply ml-3;
+  text-transform: uppercase;
+  @apply text-sm;
 }
 
 button.alt:hover {
@@ -345,25 +354,29 @@ fieldset {
 
 input[type="email"],
 input[type="password"] {
-  @apply shadow;
   @appy appearance-none;
   @apply border;
   @apply rounded;
   @apply w-full;
   @apply py-2;
   @apply px-3;
-  color: config('colors.grey-darker');
-  @apply leading-tight;
+  @apply border-grey-dark;
+}
+
+input::placeholder {
+  color: config('colors.grey-dark');
+  opacity: 1;
 }
 
 input[type="email"]:focus,
 input[type="password"]:focus {
   @apply outline-none;
-  @apply shadow-outline;
+  border: 2px solid rgba(126,160,57,.4);
 }
 
 label[for="password"],
 label[for="id"] {
+  @apply ml-3;
   @apply block;
   @apply mb-2;
 }
@@ -436,7 +449,29 @@ input[type="checkbox"] {
 
 .radio-group label > input:checked + span:before {
   border-color: config('colors.green');
-  background-image: radial-gradient(circle closest-side, config('colors.green') 0%, config('colors.green') 60%, transparent 60%, transparent 100%);
+  background-color: config('colors.green');
+  box-shadow: inset 0 0 0 .15em rgba(255, 255, 255, .95);
+}
+
+fieldset.checkbox label,
+fieldset.checkbox input {
+  cursor: pointer;
+}
+
+fieldset.checkbox label > span:before {
+  content: "";
+  display: inline-block;
+  border: 1px solid config('colors.black');
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
+  vertical-align: middle;
+  text-align: center;
+  @apply mr-2;
+}
+
+fieldset.checkbox label > input:checked + span:before {
+  background-image: url("./img/checkmark.png");
 }
 
 /* Hide the browser's default button, but try to be screen reader friendly about it */
@@ -444,6 +479,11 @@ input[type=radio]  {
   opacity: 0;
   position: absolute;
   cursor: pointer;
+}
+
+input[type=checkbox] {
+  opacity: 0;
+  position: absolute;
 }
 
 /* OAuth Email Confirmation Specific */

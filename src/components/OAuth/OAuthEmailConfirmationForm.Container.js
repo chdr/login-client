@@ -98,7 +98,7 @@ class OAuthEmailConfirmationContainer extends React.Component {
   };
 
   render() {
-    const { emails } = this.props;
+    const { emails, authServer } = this.props;
 
     const {
       isSubmitting,

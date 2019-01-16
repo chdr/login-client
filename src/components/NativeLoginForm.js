@@ -24,6 +24,7 @@ const NativeLoginForm = ({
       type="email"
       name="id"
       errors={idErrors}
+      placeholder="mbolton@initech.net"
     />
     <Input
       htmlFor="password"

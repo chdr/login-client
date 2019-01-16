@@ -11,7 +11,8 @@ class OAuthCallback extends Component {
     hadError: false,
     emailList: [],
     errorTitle: '',
-    errorDetail: ''
+    errorDetail: '',
+    authServer: ''
   };
 
   onError = (err) => {
@@ -53,6 +54,10 @@ class OAuthCallback extends Component {
     const { search } = location;
     const { authServer } = match.params;
 
+    this.setState({
+      authServer
+    });
+
     this.call({
       search,
       authServer
@@ -66,7 +71,8 @@ class OAuthCallback extends Component {
       hadError,
       errorTitle,
       errorDetail,
-      emailList
+      emailList,
+      authServer
     } = this.state;
 
     if (hadError) {
@@ -85,6 +91,7 @@ class OAuthCallback extends Component {
     if (emailList.length) {
       return (
         <OAuthEmailConfirmation
+          authServer={authServer}
           emails={emailList}
           handleSuccess={handleSuccessRedirect}
         />
