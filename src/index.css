@@ -371,7 +371,8 @@ input::placeholder {
 input[type="email"]:focus,
 input[type="password"]:focus {
   @apply outline-none;
-  border: 2px solid rgba(126,160,57,.4);
+  border-color: rgba(126, 160, 57, .4);
+  box-shadow: 0 0 0 1px rgba(126, 160, 57, .4);
 }
 
 label[for="password"],
