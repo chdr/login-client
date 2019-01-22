@@ -16,8 +16,9 @@ class OAuthCallback extends Component {
   };
 
   onError = (err) => {
+    const { authServer } = this.state;
     const { response } = err;
-    const { errorDetail, errorTitle } = errorMessageFilter(response);
+    const { errorDetail, errorTitle } = errorMessageFilter({ response, authServer });
 
     this.setState({
       hadError: true,

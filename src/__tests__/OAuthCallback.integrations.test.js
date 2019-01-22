@@ -334,10 +334,12 @@ describe('OAuthCallback', () => {
         timezone: null,
         isActive: 1
       };
+
       const mockResponseHeaders = {
         status: 200,
         location: 'http://www.chdrdev.com:8888/admin/dashboard/',
       };
+
       mockAdapter
         .onGet(`${process.env.API_URL}/oauth/${authServer}-callback${queryParams}`)
         .reply(200, mockResponseData, mockResponseHeaders);
@@ -358,5 +360,31 @@ describe('OAuthCallback', () => {
         done();
       }, 0);
     });
+
+    it('should display unique error message if 401 returned from Google callback', (done) => {
+      mockAdapter
+      .onGet(`${process.env.API_URL}/oauth/${authServer}-callback${queryParams}`)
+      .reply(401, '');
+
+      wrapped = mount(
+        <MemoryRouter initialEntries={[`/client/${authServer}${queryParams}`]}>
+          <App />
+        </MemoryRouter>
+      );
+
+      setTimeout(() => {
+        wrapped.update();
+
+        expect(wrapped.exists('div[role="alert"]')).toEqual(true);
+        expect(wrapped.render().text()).toContain('Account not found');
+        expect(wrapped.render().text()).toContain('We\'re sorry, but the email address you selected from Google could not be found in Cheddar. Please try a different email address, or create an account at Cheddar.');
+
+        done();
+      }, 0);
+    });
+
+    // TODO - A lot of the tests in the GitHub describe should be replicated
+    // with Google. Consider rewriting so that each test is applied as both
+    // options are iterated over.
   });
 });

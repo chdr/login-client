@@ -142,7 +142,7 @@ describe('Native login form', () => {
       wrapped.update();
 
       expect(wrapped.exists('div[role="alert"]')).toEqual(true);
-      expect(wrapped.render().text()).toContain('Login-in failed');
+      expect(wrapped.render().text()).toContain('Log-in failed');
       expect(wrapped.render().text()).toContain('The email address and password you entered did not match our records.');
 
       done();

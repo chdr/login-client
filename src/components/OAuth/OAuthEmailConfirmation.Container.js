@@ -26,7 +26,7 @@ class OAuthEmailConfirmationContainer extends React.Component {
     // something happened in setting up the request that triggered an error
     if (!response && !request) {}
     // proceed with the "normal" case of a "normal" error
-    const { errorTitle, errorDetail } = errorMessageFilter(response);
+    const { errorTitle, errorDetail } = errorMessageFilter({ response });
 
     this.setState({
       errorTitle,
